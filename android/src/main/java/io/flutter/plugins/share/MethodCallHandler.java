@@ -51,13 +51,28 @@ class MethodCallHandler implements MethodChannel.MethodCallHandler {
             case "shareFilesSMS":
                 expectMapArguments(call);
 
-                List<String> mPaths = call.argument("paths");
-                List<String> mMimeTypes = call.argument("mimeTypes");
+                List<String> pathsSMS = call.argument("paths");
+                List<String> mimeTypesSMS = call.argument("mimeTypes");
                 text = call.argument("text");
                 subject = call.argument("subject");
                 // Android does not support showing the share sheet at a particular point on screen.
                 try {
-                    share.shareFilesSMS(mPaths, mMimeTypes, text, subject);
+                    share.shareFilesSMS(pathsSMS, mimeTypesSMS, text, subject);
+                    result.success(null);
+                } catch (IOException e) {
+                    result.error(e.getMessage(), null, null);
+                }
+                break;
+            case "shareFilesWA":
+                expectMapArguments(call);
+
+                List<String> pathsWA = call.argument("paths");
+                List<String> mimeTypesWA = call.argument("mimeTypes");
+                text = call.argument("text");
+                subject = call.argument("subject");
+                // Android does not support showing the share sheet at a particular point on screen.
+                try {
+                    share.shareFilesWA(pathsWA, mimeTypesWA, text, subject);
                     result.success(null);
                 } catch (IOException e) {
                     result.error(e.getMessage(), null, null);
