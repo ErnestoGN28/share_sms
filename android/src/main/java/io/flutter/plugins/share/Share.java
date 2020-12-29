@@ -67,8 +67,7 @@ class Share {
 
     Intent shareIntent = new Intent();
     ArrayList<Uri> fileUris = getUrisForPaths(paths);
-    shareIntent.setAction(Intent.ACTION_SENDTO);
-    shareIntent.setData(Uri.parse("smsto:"));
+    shareIntent.setAction(Intent.ACTION_SEND);
     shareIntent.putExtra("sms_body", text);
     shareIntent.putExtra(Intent.EXTRA_STREAM, fileUris.get(0));
     shareIntent.setType(
